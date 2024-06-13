@@ -2,13 +2,31 @@ import React from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import './App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { decrement, increment, selectCount } from './features/counter/counterSlice';
 
 function App() {
+  const count = useSelector(selectCount);
+  const dispatch = useDispatch();
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
+        <div>
+        <button
+          aria-label="Decrement value"
+          onClick={() => dispatch(decrement())}
+        >
+          -
+        </button>
+        <span>{count}</span>
+        <button
+          aria-label="Increment value"
+          onClick={() => dispatch(increment())}
+        >
+          +
+        </button>
+      </div>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
